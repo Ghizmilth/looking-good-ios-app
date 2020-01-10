@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>857608622918-3rav1vcfbuat8audldcda74uf1316au6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.857608622918-3rav1vcfbuat8audldcda74uf1316au6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAeVLVsFMcrsBSrywVKVsMzpy-X-Jfc6rA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>857608622918</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.hidanerferrer.LookingGood</string>
+	<key>PROJECT_ID</key>
+	<string>looking-good-d61b8</string>
+	<key>STORAGE_BUCKET</key>
+	<string>looking-good-d61b8.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:857608622918:ios:da4a138c1fd71e69b70b47</string>
+	<key>DATABASE_URL</key>
+	<string>https://looking-good-d61b8.firebaseio.com</string>
+</dict>
+</plist>

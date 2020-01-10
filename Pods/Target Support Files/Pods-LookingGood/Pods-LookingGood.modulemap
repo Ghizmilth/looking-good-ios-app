@@ -1,0 +1,6 @@
+framework module Pods_LookingGood {
+  umbrella header "Pods-LookingGood-umbrella.h"
+
+  export *
+  module * { export * }
+}
