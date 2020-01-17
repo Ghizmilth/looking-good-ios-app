@@ -28,6 +28,9 @@ class HomeViewController: ViewController {
     
     @IBOutlet weak var bodyFatTextField: UITextField!
     
+    
+    @IBOutlet weak var userHeightTextField: UITextField!
+    
     @IBOutlet weak var errorLabel: UILabel!
     
     override func viewDidLoad() {
@@ -106,33 +109,96 @@ class HomeViewController: ViewController {
     */
     
     
+    func isValidWeight(_ weight:Float) -> Bool {
+        if weight <= 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
     func validateFields() -> String? {
            
            // Validate that all fields are filled in
-           if userAgeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || currentWeightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || leanBodyTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || bodyFatTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+        if userAgeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || currentWeightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || leanBodyTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || bodyFatTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || userHeightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
                return "Please, fill in all fields."
-           }
-           
+        }
+          
+        let ageRange = Int(userAgeTextField.text!)
            // Check if age is valid
-        if Int(userAgeTextField.text) < 1 && Int(userAgeTextField.text) > 100 {
+        if ageRange! < 1 || ageRange! > 100 {
                return "Sorry, type a valid age between 1 and 100"
-           } else {
-               // Check if the weight is valid
-               let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-               if isValidPassword(testStr: cleanedPassword) == false {
-                   // Password isn;t secure enough
-                   return "Pleae, make sure your password is at least 8 characters, contains a special character and a number."
+        }
+        
+//        let currentWeight = (currentWeightTextField.text! as NSString).floatValue
+        
+        if isValidWeight((currentWeightTextField.text! as NSString).floatValue) == false {
+            return "Enter a valid value for Current Weight"
+        }
+        
+        if isValidWeight((leanBodyTextField.text! as NSString).floatValue) == false {
+            return "Enter a valid value for Lean Body Weight"
+        }
+        
+        if isValidWeight((bodyFatTextField.text! as NSString).floatValue) == false {
+            return "Enter a valid value for Body Fat Goal"
+        }
+        
+        if ((userHeightTextField.text! as NSString).floatValue) < 1.00 || ((userHeightTextField.text! as NSString).floatValue) > 7.11 {
+                   return "Enter a valid value for Height"
                }
-           }
            
-           return nil
-       }
+        return nil
+    }
     
     
     @IBAction func saveTapped(_ sender: UIButton) {
         
+        let error = validateFields()
         
-        
-    }
+        if error != nil {
+                   //There is something wrong with the fields, show error message
+                   showError(error!)
+               }
+               else {
+                   // Create cleaned versions of the data
+                    let userAge = Int(userAgeTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines))
+                    let currentWeight = (currentWeightTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) as NSString).floatValue
+                    let leanWeight = (leanBodyTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) as NSString).floatValue
+                    let bodyFat = (bodyFatTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) as NSString).floatValue
+                    let userHeight = (userHeightTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) as NSString).floatValue
+
+
+            
+                   //Save data
+                    let db = Firestore.firestore()
+//
+            let data = ["age":userAge, "weight":[currentWeight], "leanBodyWeight":leanWeight, "bodyFat":[bodyFat], "height":userHeight] as [String : Any]
+                        
+                        
+                    db.collection("users").document(email).setData(data) {(err) in
+                         if err != nil {
+                         // Show error message
+                         self.showError("Error saving user data")
+                         }
+
+                    }
+                                       
+                                       //Transition to the HOme Screen
+//                                       self.transitionToHome()
+                                       
+//                                   }
+                   }
+                   //Transition to the HOME screen
+      }
+    
+    
+    
+    func showError(_ message:String) {
+           //
+           errorLabel.text = message
+           errorLabel.alpha = 1
+       }
+//    }
     
 }
