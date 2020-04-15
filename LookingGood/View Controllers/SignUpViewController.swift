@@ -94,7 +94,7 @@ class SignUpViewController: ViewController {
             let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             if isValidPassword(testStr: cleanedPassword) == false {
                 // Password isn;t secure enough
-                return "Pleae, make sure your password is at least 8 characters, contains a special character and a number."
+                return "Please, make sure your password is at least 8 characters, contains a special character and a number."
             }
         }
         

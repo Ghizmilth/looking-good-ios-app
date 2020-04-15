@@ -82,7 +82,7 @@ class LoginViewController: ViewController {
                     self.showError(error! as! String)
                 }
                 else {
-                    //Transition to the HOme Screen
+                    //Transition to the Home Screen
                     self.transitionToHome()
                 }
                 

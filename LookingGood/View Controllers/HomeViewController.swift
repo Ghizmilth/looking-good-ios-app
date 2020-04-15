@@ -61,6 +61,7 @@ class HomeViewController: ViewController {
     override func setUpElements() {
      //Hide the error label
      userNameDisplay.alpha = 0
+     errorLabel.alpha = 0
         
     }
     
@@ -162,7 +163,7 @@ class HomeViewController: ViewController {
                }
                else {
                    // Create cleaned versions of the data
-                    let userAge = Int(userAgeTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines))
+                    let userAge = (userAgeTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines))
                     let currentWeight = (currentWeightTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) as NSString).floatValue
                     let leanWeight = (leanBodyTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) as NSString).floatValue
                     let bodyFat = (bodyFatTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) as NSString).floatValue
@@ -184,21 +185,24 @@ class HomeViewController: ViewController {
 
                     }
                                        
-                                       //Transition to the HOme Screen
-//                                       self.transitionToHome()
-                                       
-//                                   }
+                    //Transition to the HOme Screen
+                    self.transitionToInfoView()
                    }
-                   //Transition to the HOME screen
       }
     
     
     
     func showError(_ message:String) {
-           //
            errorLabel.text = message
            errorLabel.alpha = 1
        }
-//    }
+    
+    func transitionToInfoView() {
+        
+        let infoViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.infoViewController) as? InfoViewController
+        
+        view.window?.rootViewController = infoViewController
+        view.window?.makeKeyAndVisible()
+    }
     
 }
